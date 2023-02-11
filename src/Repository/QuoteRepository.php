@@ -39,14 +39,15 @@ class QuoteRepository extends ServiceEntityRepository
         }
     }
     
-    public function findBySymbolAndTypeLast24($symbol, $type): array
+    public function findBySymbolAndType($source, $symbol, $type, $period): array
     {
         return $this->createQueryBuilder('q')
-            ->andWhere('q.symbol = :symbol AND q.type = :type')
+            ->andWhere('q.source = :source AND q.symbol = :symbol AND q.type = :type')
+            ->setParameter('source', $source)
             ->setParameter('symbol', $symbol)
             ->setParameter('type', $type)
             ->orderBy('q.time', 'DESC')
-            ->setMaxResults(20)
+            ->setMaxResults(24 * $period)
             ->getQuery()
             ->getResult()
         ;

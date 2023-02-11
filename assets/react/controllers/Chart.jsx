@@ -10,6 +10,7 @@ import ErrorBoundary from './ErrorBoundary';
 
 const Chart = (props) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [{ label: props.name, data: [] }] });
+  const [statistics, setStatistics] = useState({ min: 0, max: 1000, last: 0, diff: ''});
   const [haveData, setHaveData] = useState(false); 
   const [text, setText] = useState({}); 
 
@@ -17,11 +18,12 @@ const Chart = (props) => {
   
     const fetchData = async () => {
       try {
-        const res = await fetch('/api/crypto?symbol='+ props.name );
+        const res = await fetch('/api/crypto?source=' + props.source + '&symbol='+ props.name + '&period=' + props.period );
         const result = await res.json();
         
         setText( JSON.stringify(result) );
-        setChartData( result );
+        setStatistics( result.statistics );
+        setChartData( result.chart );
         
         /*setChartData(oldData => {
           const copyData = Object.assign({}, oldData);
@@ -59,7 +61,7 @@ const Chart = (props) => {
        });
 
        setHaveData(true);*/
-     }, 1000);
+     }, 100);
      
      //Clearing the interval
      return () => clearInterval(interval);
@@ -73,6 +75,8 @@ const Chart = (props) => {
     return (
      <ErrorBoundary>
        <div style={{ width: '600px' }}>
+       <h2>{statistics.last}</h2>
+       <div dangerouslySetInnerHTML={{__html: statistics.diff}} />
        <Line
         data={ chartData } 
         options={{ 
@@ -81,8 +85,8 @@ const Chart = (props) => {
                     type: 'time',
                 },
                 y: {
-                    suggestedMin: props.min,
-                    suggestedMax: props.max,
+                    suggestedMin: statistics.min,
+                    suggestedMax: statistics.max,
                     ticks: {
                        callback: function(value, index, ticks) {
                            return '$' + value;

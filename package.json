@@ -40,6 +40,7 @@
         "react-dom": "^18.2.0",
         "react-fetch-streams": "^1.1.2",
         "react-router": "^5.3.4",
-        "react-router-dom": "^5.2.0"
+        "react-router-dom": "^5.2.0",
+        "react-use-websocket": "^4.2.0"
     }
 }

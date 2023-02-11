@@ -31,7 +31,6 @@ class AboutController extends BaseController
        self::init($request);
 
        $about = $doctrine->getRepository(About::class)->findOneBy(['lang' => self::$props->lang, 'name' => 'demo']);
-      
        self::$props->contents = $about->getContents();
        self::$props->selected = 'demo';
 

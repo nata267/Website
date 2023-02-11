@@ -38,7 +38,7 @@ const App = ({ props }) => {
                  <BrowserRouter>
                     <Switch>
                        <Route path="/" exact component={() => (<About text={ props.contents } />)} />
-                       <Route path="/demo" exact component={() => (<Demo text={ props.contents } />)} />
+                       <Route path="/demo" exact component={() => (<Demo text={ props.contents } periods={ props.periods }/>)} />
                     </Switch>
                  </BrowserRouter>
                  

@@ -14,6 +14,9 @@ class Quote
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column]
+    private ?int $source = null;
+    
     #[ORM\Column(length: 10)]
     private ?string $symbol = null;
 
@@ -29,6 +32,18 @@ class Quote
     public function getId(): ?int
     {
         return $this->id;
+    }
+    
+    public function getSource(): ?int
+    {
+        return $this->source;
+    }
+    
+    public function setSource(int $source): self
+    {
+        $this->source = $source;
+
+        return $this;
     }
 
     public function getSymbol(): ?string

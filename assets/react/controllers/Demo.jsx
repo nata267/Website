@@ -1,21 +1,63 @@
 // assets/react/controllers/Demo.js
-import React from 'react';
-import { Col, Row, Divider } from 'antd';
+import React, { useState } from 'react';
+import { Divider, Dropdown, Space, Button } from 'antd';
 
 import Chart from './Chart';
 
+const items = [
+  {
+    label: 'BTC/USD',
+    key: 'BTC/USD',
+  },
+  {
+    label: 'ETH/USD',
+    key: 'ETH/USD',
+  },
+  {
+    label: 'LTC/USD',
+    key: 'LTC/USD',
+  },
+  {
+    label: 'XRP/USD',
+    key: 'XRP/USD',
+  }
+];
+
 const Demo = (props) => {
+  const [symbol, setSymbol] = useState('BTC/USD'); 
+  const [label, setLabel] = useState('BTC/USD'); 
+  const [period, setPeriod] = useState(1); 
+
+  const onDropdownClick = (e) => {
+    setSymbol(e.key);
+    setLabel(items.find((elm) => elm.key === e.key).label)
+  };
+  
     return (
     <>
       <div dangerouslySetInnerHTML={{__html: props.text}} />
       <Divider />
-      <Chart name="BTC/USD" min="23500" max="24000"/>
+      <Space>
+         <Dropdown.Button
+           menu={{ 
+             items,
+             onClick: onDropdownClick }}
+         >
+           {label}
+         </Dropdown.Button>
+         
+         {Object.keys(props.periods).map(key => {
+            return (
+               <>
+                  <Divider type="vertical" />
+                  <Button type="link" size="small" onClick={() => setPeriod(key)}>{props.periods[key]}</Button>
+               </>
+           );
+         })}
+         
+      </Space>
       <Divider />
-      <Chart name="ETH/USD" min="1620" max="1700"/>
-      <Divider />
-      <Chart name="LTC/USD" min="97" max="103"/>
-      <Divider />
-      <Chart name="XRP/USD" min="0.408" max="0.418"/>
+      <Chart name={symbol} source="1" period={period} />
     </>
     );
 };

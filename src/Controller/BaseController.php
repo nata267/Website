@@ -17,10 +17,13 @@ class BaseController extends AbstractController
         $session->start();
         
         $lang = 'ENG';
-        $header = 'Natalia Romanova PR Racunarsko Programiranje Ce Plus Plus Beograd';
-        $menu = array( 'ENG' => array( 'about' => 'About US', 'projects' => 'Projects', 'demo' => 'Demo' ),
+        $header = 'Natalia Romanova PR Računarsko Programiranje Ce Plus Plus Beograd';
+        $menu = array( 'ENG' => array( 'about' => 'About us', 'projects' => 'Projects', 'demo' => 'Demo' ),
                        'RUS' => array( 'about' => 'О нас', 'projects' => 'Проекты', 'demo' => 'Демо' ),
                        'SRP' => array( 'about' => 'О нама', 'projects' => 'Пројекти', 'demo' => 'Демо' ) );
+        $periods = array( 'ENG' => array( '1' => 'in 24 hours', '5' => 'past 5 days', '30' => 'past month'),
+                          'RUS' => array( '1' => 'за 24 часа', '5' => 'за 5 дней', '30' => 'за месяц'),
+                          'SRP' => array( '1' => 'за 24 сата', '5' => 'у претходних 5 дана', '30' => 'претходног месеца') );
 
         if(!empty($request->query->get('lang')) && 
               in_array($request->query->get('lang'), array('ENG', 'RUS', 'SRP')) )
@@ -36,7 +39,8 @@ class BaseController extends AbstractController
         self::$props = (object) array(
             'lang' => $lang,
             'header' => $header,
-            'menu' => (object) $menu[$lang] 
+            'menu' => (object) $menu[$lang],
+            'periods' => (object) $periods[$lang]  
         );
     }
 }
