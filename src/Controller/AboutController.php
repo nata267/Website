@@ -25,6 +25,19 @@ class AboutController extends BaseController
         return $this->render('about/index.html.twig', ['props' => self::$props]);
     }
     
+    #[Route('/chat')]
+    public function chat(Request $request, ManagerRegistry $doctrine): Response
+    {
+        self::init($request);
+        
+        $about = $doctrine->getRepository(About::class)->findOneBy(['lang' => self::$props->lang, 'name' => 'chat']);
+        
+        self::$props->contents = $about->getContents();
+        self::$props->selected = 'chat';
+        
+        return $this->render('about/index.html.twig', ['props' => self::$props]);
+    }
+    
     #[Route('/demo')]
     public function demo(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -35,18 +48,5 @@ class AboutController extends BaseController
        self::$props->selected = 'demo';
 
        return $this->render('about/index.html.twig', ['props' => self::$props]);
-    }
-    
-    #[Route('/projects')]
-    public function projects(Request $request, ManagerRegistry $doctrine): Response
-    {
-        self::init($request);
-        
-        $about = $doctrine->getRepository(About::class)->findOneBy(['lang' => self::$props->lang, 'name' => 'projects']);
-        
-        self::$props->contents = $about->getContents();
-        self::$props->selected = 'projects';
-        
-        return $this->render('about/index.html.twig', ['props' => self::$props]);
     }
 }

@@ -1,6 +1,6 @@
 // assets/react/controllers/MyMenu.js
 import React from 'react';
-import { HomeOutlined, LineChartOutlined, GithubOutlined } from '@ant-design/icons';
+import { HomeOutlined, WechatOutlined, LineChartOutlined, GithubOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 
 function getItems( props ) {
@@ -19,6 +19,11 @@ function getItems( props ) {
       label: <a href="https://github.com/nata267" target="_blank" rel="noopener noreferrer">Github</a>,
       key: 'github',
       icon: <GithubOutlined />,
+    },
+    {
+      label: <a href="/chat" rel="noopener noreferrer">{ props.menu.chat }</a>,
+      key: 'chat',
+      icon: <WechatOutlined />,
     }
   ];
 }

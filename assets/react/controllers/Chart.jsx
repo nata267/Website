@@ -6,8 +6,6 @@ import { CategoryScale, LinearScale, TimeScale, PointElement, LineElement, Title
 ChartJS.register( CategoryScale, LinearScale, TimeScale, PointElement, LineElement,  Title, Tooltip, Legend );
 import { Moment } from 'chartjs-adapter-moment';
 
-import ErrorBoundary from './ErrorBoundary';
-
 const Chart = (props) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [{ label: props.name, data: [] }] });
   const [statistics, setStatistics] = useState({ min: 0, max: 1000, last: 0, diff: ''});
@@ -44,6 +42,8 @@ const Chart = (props) => {
       }
     }
     
+    fetchData();
+    
     const interval = setInterval(() => {
     
        fetchData();
@@ -61,7 +61,7 @@ const Chart = (props) => {
        });
 
        setHaveData(true);*/
-     }, 100);
+     }, 1000);
      
      //Clearing the interval
      return () => clearInterval(interval);
@@ -73,8 +73,7 @@ const Chart = (props) => {
   } else {
 
     return (
-     <ErrorBoundary>
-       <div style={{ width: '600px' }}>
+     <div style={{ width: '600px' }}>
        <h2>{statistics.last}</h2>
        <div dangerouslySetInnerHTML={{__html: statistics.diff}} />
        <Line
@@ -98,7 +97,8 @@ const Chart = (props) => {
              duration: 0
           },
         }}
-       /></div></ErrorBoundary>
+       />
+     </div>
     );
 
   }

@@ -5,12 +5,13 @@ import { Layout, Space, Image, theme, Typography } from 'antd';
 const { Sider, Content } = Layout;
 const { Paragraph } = Typography;
 
+import ErrorBoundary from './ErrorBoundary';
 import MyMenu from './MyMenu';
 import LangDropDown from './LangDropDown';
 import MyFooter from './MyFooter';
 import About from './About';
 import Demo from './Demo';
-import Projects from './Projects';
+import Chat from './Chat';
 
 const App = ({ props }) => {  
   const {
@@ -18,6 +19,7 @@ const App = ({ props }) => {
   } = theme.useToken();
   
   return (
+  <ErrorBoundary>
     <Space direction="vertical" style={{ width: '100%', }} size={[0, 48]}>
       <Layout className="layout">
     
@@ -29,7 +31,7 @@ const App = ({ props }) => {
               <MyMenu menu={ props.menu } selected={ props.selected } />
             </Sider>
           
-            <Content style={{ padding: '0 24px', minHeight: 280 }}>
+            <Content style={{ padding: '0 24px', minHeight: 600 }}>
               <LangDropDown lang={ props.lang }/>
               
               <Paragraph>
@@ -38,6 +40,7 @@ const App = ({ props }) => {
                  <BrowserRouter>
                     <Switch>
                        <Route path="/" exact component={() => (<About text={ props.contents } />)} />
+                       <Route path="/chat" exact component={() => (<Chat text={ props.contents } />)} />
                        <Route path="/demo" exact component={() => (<Demo text={ props.contents } periods={ props.periods }/>)} />
                     </Switch>
                  </BrowserRouter>
@@ -52,6 +55,7 @@ const App = ({ props }) => {
       
       </Layout>
     </Space>
+  </ErrorBoundary>
   );
 
 };

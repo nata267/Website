@@ -8,6 +8,7 @@
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
         {{ encore_entry_link_tags('app') }}
 
          <!-- Renders a link tag (if your module requires any CSS)
