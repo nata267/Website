@@ -61,7 +61,7 @@ const Book = (props) => {
                    <td style={{ width: '50%', textAlign: 'right', borderBottom: '1px solid #ddd'}}>Price - </td>
                    <td style={{ width: '50%', textAlign: 'left', borderBottom: '1px solid #ddd'}}>Volume</td>
                 </tr>
-           { asks.map((quote) => (
+           { asks.reverse().map((quote) => (
                 <tr style={{color: 'red'}} >
                   <td style={{ width: '50%', textAlign: 'right', borderBottom: '1px solid #ddd'}}>{Math.round(quote[0] * 10000) / 10000} - </td>
                   <td style={{ width: '50%', textAlign: 'left', borderBottom: '1px solid #ddd'}}>{quote[1]}</td></tr>

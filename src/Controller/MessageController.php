@@ -67,6 +67,26 @@ class MessageController extends BaseController
         $entityManager = $doctrine->getManager();
         $entityManager->persist($message);
         $entityManager->flush();
+        
+        $curl = curl_init("https://api.openai.com/v1/completions");
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: Bearer ***"));
+        curl_setopt($curl, CURLOPT_POSTFIELDS, '{"model":"text-davinci-003","prompt":"'.$post['message'].'","temperature":0.5,"max_tokens":1000,"top_p":1,"frequency_penalty":0.52,"presence_penalty":0.5}');
+        $result = curl_exec($curl);
+        curl_close($curl);
+        
+        if($result)
+        {
+           $message = new Message();
+           $message->setName("ChatGPT");
+           $message->setEmail("");
+           $message->setText("[".$post['name']."] ".str_replace('"\'',"", json_decode($result,true)["choices"][0]["text"]));
+           $message->setTime(new \DateTime('now'));
+           $message->setColor('#000000'); // TODO
+           $entityManager->persist($message);
+           $entityManager->flush();
+        }
 
         $response->setContent(json_encode(array('status' => 'ok')));
         return $response;
