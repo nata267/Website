@@ -1,6 +1,7 @@
 // assets/react/controllers/AddMessage.js
 import React, { useState } from 'react';
-import { Button, Input, Form, Space } from 'antd';
+import { Space } from 'antd';
+import { Form, Input, Button } from 'antd-mobile';
 const { TextArea } = Input;
 
 const AddMessage = (props) => {
@@ -60,8 +61,8 @@ const AddMessage = (props) => {
     
     <Form form={form} 
          onFinish={onFinish} 
-         onFinishFailed={onFinishFailed} size="small">
-     <Space.Compact block>
+         onFinishFailed={onFinishFailed}>
+     <Space.Compact block size="large">
       <Form.Item 
            name="name"
            rules={[{
@@ -86,12 +87,12 @@ const AddMessage = (props) => {
             />
        </Form.Item>
        <Form.Item>
-          <Button type="primary" htmlType="submit">Send</Button> 
+          <Button type="primary" htmlType="submit" color="primary">Send</Button> 
        </Form.Item>
       </Space.Compact>
     </Form>
   </>
-    );
+  );
 };
 
 export default AddMessage;

@@ -12,6 +12,7 @@
         "core-js": "^3.23.0",
         "jquery": "^3.6.3",
         "regenerator-runtime": "^0.13.9",
+        "resize-observer-polyfill": "^1.5.1",
         "ts-loader": "^9.0.0",
         "typescript": "^4.9.4",
         "webpack": "^5.74.0",
@@ -30,6 +31,7 @@
         "@babel/plugin-proposal-class-properties": "^7.18.6",
         "@babel/plugin-transform-runtime": "^7.19.6",
         "add": "^2.0.6",
+        "antd-mobile": "^5.28.1",
         "axios": "^1.2.6",
         "chart.js": "^3.4.1",
         "chartjs-adapter-moment": "^1.0.1",
@@ -39,6 +41,7 @@
         "react-chartjs-2": "^5.2.0",
         "react-dom": "^18.0",
         "react-fetch-streams": "^1.1.2",
+        "react-responsive": "^9.0.2",
         "react-router": "^5.3.4",
         "react-router-dom": "^5.2.0",
         "react-use-websocket": "^4.2.0"

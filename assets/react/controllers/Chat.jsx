@@ -9,9 +9,7 @@ const Chat = (props) => {
     return (
      <>
       <div dangerouslySetInnerHTML={{__html: props.text}} />
-      <Divider />
       <AddMessage />
-      <Divider />
       <Messages />
      </>
     );

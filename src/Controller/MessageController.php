@@ -42,8 +42,6 @@ class MessageController extends BaseController
     #[Route('/api/messages/add')]
     public function add(Request $request, ManagerRegistry $doctrine, ValidatorInterface $validator): Response
     {
-        self::init($request);
-        
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');

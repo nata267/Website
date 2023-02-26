@@ -50,7 +50,10 @@ class QuoteController extends BaseController
                  'min' => 0,
                  'max' => 1000,
                  'last' => 0,
-                 'diff' => ''
+                 'diff' => [
+                    'value' => 0,
+                    'suffix' => ''
+                 ]
             ]
         ];
         
@@ -84,26 +87,25 @@ class QuoteController extends BaseController
         }
         
         $data['statistics']['last'] = round($last, 2);
+        $data['statistics']['diff']['value'] = $diff;
+        $data['statistics']['diff']['suffix'] = ((array)self::$props->periods)[$period];
            
         if($diff > 0) 
         {
             // Green
             $data['chart']['datasets'][0]['borderColor'] = '#339966';
             $data['chart']['datasets'][0]['backgroundColor'] = '#c6ecd9';
-            $data['statistics']['diff'] = "<p style='color:#339966'><b>+".$diff."  ".((array)self::$props->periods)[$period]."</b></p>";
         } 
         else if ($diff < 0)
         {
             // Red
             $data['chart']['datasets'][0]['borderColor'] = '#cc0000';
             $data['chart']['datasets'][0]['backgroundColor'] = '#ff9999';
-            $data['statistics']['diff'] = "<p style='color:#cc0000'><b>".$diff."  ".((array)self::$props->periods)[$period]."</b></p>";
         }
         else
         {
             $data['chart']['datasets'][0]['borderColor'] = '#cccccc';
             $data['chart']['datasets'][0]['backgroundColor'] = '#eeeeee';
-            $data['statistics']['diff'] = "<p style='color:#cccccc'><b>".$diff."  ".((array)self::$props->periods)[$period]."</b></p>";
         }
         
         $response = new Response();

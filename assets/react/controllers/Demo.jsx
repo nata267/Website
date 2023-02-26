@@ -57,11 +57,10 @@ const Demo = (props) => {
             return (
                <>
                   <Divider type="vertical" />
-                  <Button type="link" size="small" onClick={() => setPeriod(key)}>{props.periods[key]}</Button>
+                  <Button type="link" onClick={() => setPeriod(key)}>{props.periods[key]}</Button>
                </>
            );
          })}
-         
       </Space>
       <Divider />
       <Chart name={symbol} source="1" period={period} />

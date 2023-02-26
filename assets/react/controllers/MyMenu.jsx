@@ -8,31 +8,32 @@ function getItems( props ) {
     {
       label: <a href="/" rel="noopener noreferrer">{ props.menu.about }</a>,
       key: 'about',
-      icon: <HomeOutlined />,
+      icon: <HomeOutlined className="menu-icon"/>,
     },
     {
       label: <a href="/demo" rel="noopener noreferrer">{ props.menu.demo }</a>,
       key: 'demo',
-      icon: <LineChartOutlined />,
+      icon: <LineChartOutlined className="menu-icon"/>,
     },
     {
       label: <a href="https://github.com/nata267" target="_blank" rel="noopener noreferrer">Github</a>,
       key: 'github',
-      icon: <GithubOutlined />,
+      icon: <GithubOutlined className="menu-icon"/>,
     },
     {
       label: <a href="/chat" rel="noopener noreferrer">{ props.menu.chat }</a>,
       key: 'chat',
-      icon: <WechatOutlined />,
+      icon: <WechatOutlined className="menu-icon"/>,
     }
   ];
 }
 
-const MyMenu = ( props ) => {
+const MyMenu = ( props ) => {  
   return (
-      <Menu style={{ width: 200 }}
+      <Menu 
         defaultSelectedKeys={[ props.selected ]}
-        mode='inline'
+        mode={ props.mode }
+        theme={ props.theme }
         items={ getItems( props ) }
       />
   );

@@ -35,11 +35,11 @@ const Messages = (props) => {
   } else {
 
     return (
-     <>
+     <p>
        {messages.map((message) => (
           <div style={{color: message.color}}><b>{message.time} {message.name}:</b> {message.text}</div>
        ))}
-     </>
+     </p>
     );
   }
 };

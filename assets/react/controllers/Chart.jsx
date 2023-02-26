@@ -1,5 +1,7 @@
 // assets/react/controllers/Chart.js
 import React, { useState, useEffect } from 'react';
+import { Statistic } from 'antd';
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 
 import { Line } from 'react-chartjs-2';
 import { CategoryScale, LinearScale, TimeScale, PointElement, LineElement, Title, Tooltip, Legend, Chart as ChartJS } from "chart.js";
@@ -8,7 +10,7 @@ import { Moment } from 'chartjs-adapter-moment';
 
 const Chart = (props) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [{ label: props.name, data: [] }] });
-  const [statistics, setStatistics] = useState({ min: 0, max: 1000, last: 0, diff: ''});
+  const [statistics, setStatistics] = useState({ min: 0, max: 1000, last: 0, diff: { value:0, suffix:'' }});
   const [haveData, setHaveData] = useState(false); 
   const [text, setText] = useState({}); 
 
@@ -73,12 +75,48 @@ const Chart = (props) => {
   } else {
 
     return (
-     <div style={{ width: '600px' }}>
-       <h2>{statistics.last}</h2>
-       <div dangerouslySetInnerHTML={{__html: statistics.diff}} />
-       <Line
+     <div class="chart">
+
+        <Statistic
+          value={statistics.last}
+          precision={2}
+          valueStyle={{
+            fontSize: '300%'
+          }}
+        />
+        
+        {statistics.diff.value > 0 ? 
+          <Statistic
+          value={Math.abs(statistics.diff.value)}
+          precision={2}
+          valueStyle={{
+            color: '#339966'
+          }}
+          prefix={<ArrowUpOutlined />}
+          suffix={statistics.diff.suffix}
+          />
+        : ( statistics.diff.value < 0 ?
+         <Statistic
+          value={Math.abs(statistics.diff.value)}
+          precision={2}
+          valueStyle={{
+            color: '#cc0000'
+          }}
+          prefix={<ArrowDownOutlined />}
+          suffix={statistics.diff.suffix}
+        />
+        : <Statistic
+          value={Math.abs(statistics.diff.value)}
+          precision={2}
+          valueStyle={{
+            color: '#cccccc'
+          }}
+          suffix={statistics.diff.suffix}
+        /> ) }
+        <Line width={ 600 } height={ 300 }
         data={ chartData } 
         options={{ 
+          responsive: false,
           scales: {
                 x: {
                     type: 'time',
@@ -98,6 +136,7 @@ const Chart = (props) => {
           },
         }}
        />
+
      </div>
     );
 

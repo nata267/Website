@@ -54,7 +54,7 @@ const Book = (props) => {
     } else {
       return (
         <>
-        <div style={{ width: '600px', textAlign: 'center', fontSize: '20px'}}>
+        <div class="book">
            {props.name} SPOT (binance.com)<br/>
            <table style={{ width: '100%' }}>
                 <tr>
@@ -62,12 +62,12 @@ const Book = (props) => {
                    <td style={{ width: '50%', textAlign: 'left', borderBottom: '1px solid #ddd'}}>Volume</td>
                 </tr>
            { asks.reverse().map((quote) => (
-                <tr style={{color: 'red'}} >
+                <tr style={{color: '#cc0000'}} >
                   <td style={{ width: '50%', textAlign: 'right', borderBottom: '1px solid #ddd'}}>{Math.round(quote[0] * 10000) / 10000} - </td>
                   <td style={{ width: '50%', textAlign: 'left', borderBottom: '1px solid #ddd'}}>{quote[1]}</td></tr>
             )) } 
            { bids.map((quote) => (
-                <tr style={{color: 'green'}} >
+                <tr style={{color: '#339966'}} >
                   <td style={{ width: '50%', textAlign: 'right', borderBottom: '1px solid #ddd' }}>{Math.round(quote[0] * 10000) / 10000} - </td>
                   <td style={{ width: '50%', textAlign: 'left', borderBottom: '1px solid #ddd'}}>{quote[1]}</td></tr>
             )) }

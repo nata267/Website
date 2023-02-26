@@ -6,7 +6,7 @@ const { Footer } = Layout;
 
 const MyFooter = (props) => {
   return (
-    <Footer style={{ textAlign: 'center', }}>
+    <Footer className="footer">
       { props.text } &copy;2023
     </Footer>
   );

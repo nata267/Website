@@ -7,28 +7,26 @@ const { Link, Paragraph } = Typography;
 
 const items = [
   {
-    label: ( <a rel="noopener noreferrer" href="?lang=ENG">ENG</a> ),
+    label: ( <a rel="noopener noreferrer" href="?lang=ENG" class="lang-drop-down-link">ENG</a> ),
     key: 'ENG',
   },
   {
-    label: ( <a rel="noopener noreferrer" href="?lang=SRP">SRP</a> ),
+    label: ( <a rel="noopener noreferrer" href="?lang=SRP" class="lang-drop-down-link">SRP</a> ),
     key: 'SRP',
   },
   {
-    label: ( <a rel="noopener noreferrer" href="?lang=RUS">RUS</a>),
+    label: ( <a rel="noopener noreferrer" href="?lang=RUS" class="lang-drop-down-link">RUS</a>),
     key: 'RUS',
   },
 ];
 
 const LangDropDown = ( props ) => {
   return (
-    <Paragraph style={{ textAlign: 'right', }}>
       <Dropdown menu={{ items }}>
         <Link onClick={(e) => e.preventDefault()}>
-          <Space>{ props.lang } <DownOutlined /></Space>
+          <Space className="lang-drop-down-link">{ props.lang } <DownOutlined /></Space>
         </Link>
       </Dropdown>
-    </Paragraph>
   );
 };
 
